@@ -1,24 +1,64 @@
 .text 
 main:
-	#Lê e imprime o nome dos integrantes do grupo
-	#Lê e imprime a matrícula dos integrantes do grupo
-	#Lê os valores das variáveis independentes e dos seus coeficientes para o cálculo da equação
+	#Lï¿½ e imprime o nome dos integrantes do grupo
+	#Lï¿½ e imprime a matrï¿½cula dos integrantes do grupo
+	#Lï¿½ os valores das variï¿½veis independentes e dos seus coeficientes para o cï¿½lculo da equaï¿½ï¿½o
 	jal leVariaveis
-	#Calcula e imprime o resultado da equação f(x,y,z) = 11ax^3 - 3by^2 + 7cz^3 - 2dz^2 a partir dos valores lidos
+	#Calcula e imprime o resultado da equaï¿½ï¿½o f(x,y,z) = 11ax^3 - 3by^2 + 7cz^3 - 2dz^2 a partir dos valores lidos
 	#Encerra o programa
 	li $v0, 10
 	syscall 
 #Inclui o arquivo com as subrotinas	
 .data
-msg0: .asciiz "Para a equação f(x,y,z) = 11ax^3 - 3by^2 + 7cz^3 - 2dz^2 \nDigite o valor de x: "
+msg0: .asciiz "Para a equaï¿½ï¿½o f(x,y,z) = 11ax^3 - 3by^2 + 7cz^3 - 2dz^2 \nDigite o valor de x: "
 msg1: .asciiz "Agora digite o valor de y: "
 msg2: .asciiz "Agora digite o valor de z: "
 msg3: .asciiz "Agora digite o valor de a: "
 msg4: .asciiz "Agora digite o valor de b: "
 msg5: .asciiz "Agora digite o valor de c: "
 msg6: .asciiz "Por fim, digite o valor de d: "
+membros: .asciiz "Digite seu Nome e sua MatrÃ­cula: "
+fim: .asciiz "Fim do programa"
+nome: .space 25			#tamanho do texto
+matricula: .space 25
+quebraLinha: .asciiz "\n"
+
 #Subrotinas utilizadas no main
 .text
+
+li $t1,4    # nÃºmero de integrantes do grupo
+  li $t2,0    # minha "variavel" de controle
+
+while:
+
+  bgt $t2,$t1, Saida  # efetuo o while enquanto t2 for menor que t1
+  
+  la $a0, membros      # PeÃ§o ao usuÃ¡rio escrever seu nome e sua mÃ¡tricula
+  jal imprimeString  
+  
+  la $a0, nome
+  la $a1, 25		# tamanho que quer ler
+  jal leString          # leio o nome
+  
+   la $a0,matricula 
+  la $a1,25
+  jal leString         # leio a mÃ¡tricula
+  
+  la $a0,quebraLinha
+  jal imprimeString   # dou uma quebra de linha
+  
+  la $a0, nome
+  jal imprimeString   # imprimo o nome
+  
+  la $a0,matricula
+  jal imprimeString  # imprimo a matricula
+ 
+  addi $t2,$t2,1   # adiciono na vÃ¡riavel de controle
+  
+  j while
+
+Saida:
+
 leVariaveis:
 	move $t0, $ra
 	#Pergunta o valor de x
