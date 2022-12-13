@@ -10,8 +10,8 @@ main:
 	syscall 
 #Inclui o arquivo com as subrotinas	
 .data
-msg0: .asciiz "Digite o valor de x: "
-msg1: .asciiz "Agora digite o valor de y :"
+msg0: .asciiz "Para a equação f(x,y,z) = 11ax^3 - 3by^2 + 7cz^3 - 2dz^2 \nDigite o valor de x: "
+msg1: .asciiz "Agora digite o valor de y: "
 msg2: .asciiz "Agora digite o valor de z: "
 msg3: .asciiz "Agora digite o valor de a: "
 msg4: .asciiz "Agora digite o valor de b: "
